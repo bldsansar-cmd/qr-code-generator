@@ -32,9 +32,9 @@
 	--border_color_selected: var(--color_grey_dark);
 	--border_size_common: 1px;
 	--border_size_bold: 0.14rem;
-	--font_size_normal: 0.7rem;
-	--font_size_big: 1.1rem;
-	--font_size_bigger: 1.2rem;
+	--font_size_normal: 1rem;
+	--font_size_big: 1.375rem;
+	--font_size_bigger: 1.75rem;
 	--shadow_blur: 10px;
 	--shadow_width: -3px;
 	--box_shadow: 0px 2px var(--shadow_blur) var(--shadow_width) var(--color_shadow);

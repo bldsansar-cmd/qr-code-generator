@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="components/HTMLMetaHeader"></head>
+	<body onload="createUserPage();">
+		<div id="header" th:include="plug_header"></div>
+		<form method="post" action="" th:object="${form}" enctype="multipart/form-data">
+			<input type="hidden" name="page_name" th:value="*{page_name}">
+			<input type="hidden" name="locale" th:value="${sessionBean.locale}">
+			<input type="hidden" name="profile_img" th:value="*{profile_img}">
+			<input type="hidden" name="id" th:value="*{id}">
+			
+			<div class="main">
+				<div class="container flexbox">
+					<section class="section_profile">
+						<div class="section_profile_nav">
+							<div class="profile_btn_nav flexbox">
+								<h4>
+									<span th:text="${sessionBean.fixedMsgBean.LABEL_PROFILE}"></span>
+								</h4>
+								<button class="btn_light" id="profile_expand_toggle_btn" type="button">
+									<span class="btn_light_expand_icon"></span>
+								</button>
+							</div>
+						</div>
+		                <div class="section_data_append_profile">
+							<div class="profile_input_section" id="profile_input_section">
+								<div class="input_section gridbox">
+									<div class="input_single">
+										<h4><span th:text="${sessionBean.fixedMsgBean.LABEL_NAME}"></span></h4>
+										<div class="input_area">
+											<input type="text" name="user_name" th:value="*{user_name}" alt="abc" class="input_elm_data">
+										</div>
+									</div>
+									<div class="input_single">
+										<h4><span th:text="${sessionBean.fixedMsgBean.LABEL_EMAIL}"></span></h4>
+										<div class="input_area">
+											<input type="text" name="user_email" th:value="*{user_email}" alt="abc" class="input_elm_data">
+										</div>
+									</div>
+									<div class="input_single">
+										<h4><span th:text="${sessionBean.fixedMsgBean.LABEL_PASSWORD}"></span></h4>
+										<div class="input_area">
+											<input type="password" name="user_password" minlength="8" th:value="*{user_password}" alt="abc" class="input_elm_data">
+										</div>
+									</div>
+									<div class="input_single">
+										<h4><span th:text="${sessionBean.fixedMsgBean.LABEL_PROFILE_IMG}"></span></h4>
+										<div class="input_area flexbox">
+											<button class="uploadFileSelect btn_narrow" id="uploadFileSelect" type="button">
+												<span th:text="${sessionBean.fixedMsgBean.BTN_SELECT_FILE}"></span>
+											</button>
+											<input type="file" name="input_value_file" id="input_value_file" onchange="imgPreview(this);" style="display:none" required>
+											<div class="upload_img_section" style="display: block;">
+												<img id="preview" class="preview" name="plug_img" th:src="*{profile_img}">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="buttons flexbox" id="">
+								<button class="userUpdateBtn selected" type="button"><span th:text="${sessionBean.fixedMsgBean.BTN_CHANGE}"></span></button>
+							</div>
+						</div>
+					</section>
+					<section class="qr_info_list" id="qr_info_list">
+						<div class="section_title">
+							<h3><span th:text="${sessionBean.fixedMsgBean.TITLE_DASHBOARD}"></span></h3>
+						</div>
+						<div class="section_data flexbox">
+							<div class="section_detail dashboard flexbox">
+								<th:block th:each="qrInfo: ${form.qrInfoList}" class="dashboard_table_tr">
+									<div class="dashboard_outer flexbox">
+										<div class="dashboard_info flexbox">
+											<div class="dashboard_info_main flexbox">
+												<img th:src="${qrInfo.qr_image}"/>
+												<div class="dashboard_info_main_qr_info">
+													<span class="dashboard_info_main_qr_info_type" th:text="${qrInfo.qr_type}"></span>
+													<h5><span class="dashboard_info_main_qr_info_name" th:text="${qrInfo.qr_name}"></span></h5>
+													<span class="dashboard_info_main_qr_info_create_date" th:text="${qrInfo.create_date_time}"></span>
+												</div>
+											</div>
+											<div class="dashboard_info_sub flexbox">
+												<div class="dashboard_info_sub_single flexbox">
+													<span th:text="${qrInfo.generate_type}"></span>
+													<span th:text="${qrInfo.short_url}"></span> 
+		<!--												<span th:text="${qrInfo.update_date_time}"></span>-->
+												</div>
+												<div class="dashboard_info_sub_single flexbox">
+													<span th:text="${sessionBean.fixedMsgBean.LABEL_SCAN + ' : ' + qrInfo.access_count}"></span>
+												</div>
+											</div>
+										</div>
+										<div class="buttons flexbox">
+											<button class="selected btn_narrow" th:onclick="|javascript:userQrDetail('__${qrInfo.id}__');|">
+												<span th:text="${sessionBean.fixedMsgBean.BTN_DETAIL}"></span>
+											</button>
+											<button class="selected btn_narrow" th:onclick="|javascript:userQrDownload('__${qrInfo.id}__');|">
+												<span th:text="${sessionBean.fixedMsgBean.BTN_DOWNLOAD}"></span>
+											</button>
+											<button class="selected btn_narrow" th:onclick="|javascript:userQrDelete('__${qrInfo.id}__');|">
+												<span th:text="${sessionBean.fixedMsgBean.BTN_DELETE}"></span>
+											</button>
+										</div>
+									</div>
+								</th:block>
+							</div>
+						</div>
+					</section> 
+
+<!--			    <section class="qr_info_detail" id="qr_info_detail">--> 
+
+<!--			        <div class="section_title">--> 
+
+<!--			            <h3><span th:text="${sessionBean.fixedMsgBean.TITLE_DETAIL}"></span></h3>--> 
+
+<!--			        </div>--> 
+
+<!--				</section>-->
+				</div>
+			</div>
+			<div id="plug_footer" th:include="plug_footer"></div>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,12 @@
+delete from learn;
+delete from solution;
+delete from product;
+insert into learn values(1, 'aaaaaaaaa', 'あああああああああ','bbbbbbbbbbbbb', 'いいいいいいいいいいい');
+insert into learn values(2, 'aaaaaaaaa', 'あああああああああ','bbbbbbbbbbbbb', 'いいいいいいいいいいい');
+insert into learn values(3, 'aaaaaaaaa', 'あああああああああ','bbbbbbbbbbbbb', 'いいいいいいいいいいい');
+insert into solution values(1, 'aaaaaaaaa', 'あああああああああ','bbbbbbbbbbbbb', 'いいいいいいいいいいい','ccccccccccc', 'ううううううううう');
+insert into solution values(2, 'aaaaaaaaa', 'あああああああああ','bbbbbbbbbbbbb', 'いいいいいいいいいいい','ccccccccccc', 'ううううううううう');
+insert into solution values(3, 'aaaaaaaaa', 'あああああああああ','bbbbbbbbbbbbb', 'いいいいいいいいいいい','ccccccccccc', 'ううううううううう');
+insert into product values(1, 'aaaaaaaaa', 'あああああああああ','bbbbbbbbbbbbb', 'いいいいいいいいいいい','ccccccccccc', 'ううううううううう');
+insert into product values(2, 'aaaaaaaaa', 'あああああああああ','bbbbbbbbbbbbb', 'いいいいいいいいいいい','ccccccccccc', 'ううううううううう');
+insert into product values(3, 'aaaaaaaaa', 'あああああああああ','bbbbbbbbbbbbb', 'いいいいいいいいいいい','ccccccccccc', 'ううううううううう');

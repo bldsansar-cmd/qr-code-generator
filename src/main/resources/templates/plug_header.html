@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div class="header flexbox" id="header">
+		<div class="logo flexbox">
+			<a href="/qrazy" class="">Home</a>
+			<a href="javascript:arrangeLangMenu();" class=""><span th:text="${sessionBean.fixedMsgBean.BTN_LANG}"></span></a>
+			<th:block th:if="${sessionBean.currentPage == 'user'}">
+				<img id="user_profile_img" class="user_profile_img" name="profile_img" th:src="'data:image/png;base64,' + ${sessionBean.loginUser.profile_img}">
+			</th:block>
+			<th:block th:if="${sessionBean.authorizedUser == true}">
+				<img id="user_profile_img_btn" class="user_profile_img_btn" name="user_profile_img_btn" onclick="javascript:arrangeUserMenu();" th:src="'data:image/png;base64,' + ${sessionBean.loginUser.profile_img}">
+			</th:block>
+			<th:block th:unless="${sessionBean.authorizedUser == true}">
+				<a th:href="|javascript:goToLogin();|">
+					<span th:text="${sessionBean.fixedMsgBean.BTN_LOGIN}"></span>
+				</a>
+			</th:block>
+		</div>
+		<div class="nav_section flexbox">
+			<th:block th:if="${sessionBean.currentPage == 'index'}">
+				<div class="nav_lang popup_outline nav_left">
+					<ul class="lang_list flexbox">
+						<li th:each="language : ${form.langList}" class="">
+							<a th:href="|javascript:changeLanguage('${language.value}');|">
+								<span th:text="${language.text}"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="nav_user popup_outline nav_left">
+					<ul class= "user_list flexbox">
+						<li th:each="userMenu : ${form.userMenuList}" class="">
+							<a th:href="|javascript:changeUserMenu('${userMenu.value}');|">
+								<span th:text="${userMenu.text}"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="nav_btn" onclick="javascript:arrangeNavMenu();">
+					<div class="bar1"></div>
+					<div class="bar2"></div>
+					<div class="bar3"></div>
+				</div>
+				<div class="nav_menu popup_outline nav_right">
+					<ul class="nav_list flexbox">
+						<li th:each="nav : ${form.navList}">
+							<a th:href="|javascript:scrollFromMenu('${nav.value}');|">
+								<span th:text="${nav.text}"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="empty_layer"></div>
+			</th:block>
+			<th:block th:unless="${sessionBean.currentPage == 'index'}">
+				<button th:classappend="|btn_narrow|" type="button" onclick="javascript:goHome();">
+					<span th:text="${sessionBean.fixedMsgBean.TITLE_BACK}"></span>
+				</button>
+			</th:block>
+		</div>
+	</div>
+</html>

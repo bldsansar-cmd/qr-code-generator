@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div class="footer flexbox">
+		<div class="nav_menu_footer">
+			<ul class="nav_list_footer flexbox">
+				<li th:each="nav : ${form.navList}"> 
+					<a th:href="|javascript:scrollToElement('${nav.value}');|"> 
+						<span th:text="${nav.text}"></span> 
+					</a> 
+				</li> 
+			</ul> 
+		</div>
+		<span th:text="${sessionBean.fixedMsgBean.SERVICE_RELEASED_DATE}"></span> 
+	</div>
+	<button class="scroll_up flexbox" type="button">
+		<span class="btn_light_go_up_icon"></span>
+	</button>
+</body>
+</html>

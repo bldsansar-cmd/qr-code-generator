@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:insert="components/HTMLMetaHeader"></head>
+	<body onload="createProduct();">
+		<div id="header" th:include="plug_header"></div>
+		<form method="post" action="" th:object="${form}" enctype="multipart/form-data">
+			<input type="hidden" name="page_name" th:value="*{page_name}">
+			<input type="hidden" name="product_id" th:value="*{product_id}">
+			<input type="hidden" name="locale" th:value="${sessionBean.locale}">
+			
+			<div class="main">
+				<section class="hero">
+					<h2><span th:text="${form.detail.name}"></span></h2>
+				</section>
+				<section class="" id="">
+					<div class="section_title">
+						<h3><span th:text="${sessionBean.fixedMsgBean.TITLE_PRODUCT_SUMMARY}"></span></h3>
+					</div>
+					<div class="section_data flexbox">
+						<div class="section_sub">
+							<div class="section_detail">
+								<span th:text="${form.detail.summary}"></span>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="" id="">
+					<div class="section_title">
+						<h3><span th:text="${sessionBean.fixedMsgBean.TITLE_PRODUCT_DETAIL}"></span></h3>
+					</div>
+					<div class="section_data flexbox">
+						<div class="section_sub">
+							<div class="section_detail">
+								<span th:text="${form.detail.detail}"></span>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<div id="plug_footer" th:include="plug_footer"></div>
+		</form>
+	</body>
+</html>

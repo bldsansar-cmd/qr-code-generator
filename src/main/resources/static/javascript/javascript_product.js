@@ -1,0 +1,4 @@
+function createProduct() {
+	//	mukouSeigyo();
+	return;
+}

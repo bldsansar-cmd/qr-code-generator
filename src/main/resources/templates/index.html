@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="components/HTMLMetaHeader"></head>
+<script th:inline="javascript">
+	var dynamicStaticOptionQrTypeList = /*[[${form.dynamicStaticOptionQrTypeList}]]*/ "";
+	var dynamicOnlyQrTypeList = /*[[${form.dynamicOnlyQrTypeList}]]*/ "";
+	var pixelColorList = /*[[${form.pixelColorList}]]*/ "";
+	var finderColorList = /*[[${form.finderColorList}]]*/ "";
+	var bgColorList = /*[[${form.bgColorList}]]*/ "";
+	var selectedCustomizeNav = /*[[${form.selectedCustomizeNav}]]*/ "";
+	var operationType = /*[[${form.operation_type}]]*/ "";
+	var zipBase64DataHTML = /*[[${form.zipBase64Data}]]*/ "";
+	var generateBtnText = /*[[${sessionBean.fixedMsgBean.BTN_GENERATE}]]*/ "generate";
+	var updateBtnText = /*[[${sessionBean.fixedMsgBean.BTN_UPDATE}]]*/ "update";
+	var staticSwitchText = /*[[${sessionBean.fixedMsgBean.LABEL_STATIC}]]*/ "static";
+	var dynamicSwitchText = /*[[${sessionBean.fixedMsgBean.LABEL_DYNAMIC}]]*/ "dynamic";
+	var withLogoText = /*[[${sessionBean.fixedMsgBean.LABEL_WITH_LOGO}]]*/ "with logo";
+	var withoutLogoText = /*[[${sessionBean.fixedMsgBean.LABEL_WITHOUT_LOGO}]]*/ "without logo";
+	var textBig = /*[[${sessionBean.fixedMsgBean.LABEL_BIG}]]*/ "big";
+	var textSmall = /*[[${sessionBean.fixedMsgBean.LABEL_SMALL}]]*/ "small";
+	var descriptionDefault = /*[[${sessionBean.fixedMsgBean.DESCRIPTION_DEFAULT}]]*/ "";
+	var descriptionWeb = /*[[${sessionBean.fixedMsgBean.DESCRIPTION_WEB}]]*/ "";
+	var descriptionText = /*[[${sessionBean.fixedMsgBean.DESCRIPTION_TEXT}]]*/ "";
+	var descriptionWifi = /*[[${sessionBean.fixedMsgBean.DESCRIPTION_WIFI}]]*/ "";
+	var descriptionBulk = /*[[${sessionBean.fixedMsgBean.DESCRIPTION_BULK}]]*/ "";
+	var descriptionFile = /*[[${sessionBean.fixedMsgBean.DESCRIPTION_FILE}]]*/ "";
+	var descriptionDynamicOnly = /*[[${sessionBean.fixedMsgBean.DESCRIPTION_GENERATE_TYPE_DYNAMIC_ONLY}]]*/ "";
+	var siteNameStr = /*[[${sessionBean.fixedMsgBean.SITE_NAME}]]*/ "";
+</script>
+
+<body onload="createIndex();">
+	<div id="header" th:include="plug_header"></div>
+	<form method="post" action="" th:object="${form}" enctype="multipart/form-data" id="my-form">
+		<input type="hidden" name="page_name" th:value="*{page_name}">
+		<input type="hidden" name="qr_type" th:value="*{qr_type}">
+		<input type="hidden" name="qr_path" th:value="*{qr_path}">
+		<input type="hidden" name="file_name" th:value="*{file_name}">
+		<input type="hidden" name="product" th:value="*{product}">
+		<input type="hidden" name="solution" th:value="*{solution}">
+		<input type="hidden" name="locale" th:value="${sessionBean.locale}">
+		<input type="hidden" name="orgBase64Data" th:value="*{orgBase64Data}">
+		<input type="hidden" name="initial" th:value="*{initial}">
+		<input type="hidden" name="smartFlg" th:value="*{smartFlg}">
+		<input type="hidden" name="plug_img" th:value="*{plug_img}">
+		<input type="hidden" name="qr_id" th:value="*{qr_id}">
+		<input type="hidden" name="selectedCustomizeNav" th:value="*{selectedCustomizeNav}">
+		<input type="hidden" name="operation_type" th:value="*{operation_type}">
+		<input type="hidden" name="customize_pixel" th:value="*{customize_pixel}">
+		<input type="hidden" name="customize_finder" th:value="*{customize_finder}">
+		<input type="hidden" name="customize_frame" th:value="*{customize_frame}">
+		<input type="hidden" name="customize_template" th:value="*{customize_template}">
+		<input type="hidden" name="zipBase64Data" th:value="*{zipBase64Data}">
+		<div class="main">
+			<div class="site_name" id="site_name">
+				<span th:text="${sessionBean.fixedMsgBean.SITE_NAME}"></span>
+			</div>
+			<div class="site_definition">
+				<span th:text="${sessionBean.fixedMsgBean.HERO_MSG}"></span>
+			</div>
+			<th:block th:if="${#lists.size(form.base64DataList) > 1}"> 
+				<div class="fixed_popup flexbox"> 
+					<div class="popup_outline popup_bulk_qr_codes flexbox"> 
+						<div class="popup_header flexbox"> 
+							<h4><span th:text="${sessionBean.fixedMsgBean.TITLE_QR_CODE_SHOW} + ' : ' + ${#lists.size(form.base64DataList)}"></span></h4> 
+							<div class="nav_btn close" onclick="closePopup('popup_bulk_qr_codes');"> 
+								<div class="bar1"></div> 
+								<div class="bar2"></div> 
+								<div class="bar3"></div> 
+							</div> 
+						</div> 
+						<!-- <h4><span th:text="${sessionBean.fixedMsgBean.TITLE_NUMBER} + ' : ' + ${#lists.size(form.base64DataList)}"></span></h4>--> 
+						<div class="popup_output_qrcode flexbox customized_scrollbar"> 
+							<th:block th:each="element, elementStat : ${form.base64DataList}"> 
+								<div class="popup_output_qrcode_single flexbox"> 
+									<th:block th:if="${#strings.length(form.inputValueBulkArray[elementStat.index]) > 0}"> 
+										<th:block th:if="${#strings.length(form.inputValueBulkArray[elementStat.index]) > 10}"> 
+											<span th:text="${#strings.substring(form.inputValueBulkArray[elementStat.index], 0, 10)} + '...'"></span> 
+										</th:block> 
+										<th:block th:unless="${#strings.length(form.inputValueBulkArray[elementStat.index]) > 10}"> 
+											<span th:text="${#strings.substring(form.inputValueBulkArray[elementStat.index], 0, #strings.length(form.inputValueBulkArray[elementStat.index]))}"></span> 
+										</th:block> 
+										<img th:src="${element}"/> 
+									</th:block> 
+								</div> 
+							</th:block> 
+						</div> 
+					</div> 
+				</div> 
+			</th:block> 
+
+			<div class="fixed_popup flexbox"> 
+				<div class="popup_outline popup_description_static_dynamic flexbox"> 
+					<div class="popup_header flexbox"> 
+						<h4><span th:text="${sessionBean.fixedMsgBean.TITLE_STATIC_DYNAMIC_DESCRIPTION}"></span></h4> 
+						<div class="nav_btn close" onclick="closePopup('popup_description_static_dynamic');"> 
+							<div class="bar1"></div> 
+							<div class="bar2"></div> 
+							<div class="bar3"></div> 
+						</div> 
+					</div> 
+					<div class="description_static_dynamic_content flexbox"> 
+						<div class=""> 
+							<h4><span th:text="${sessionBean.fixedMsgBean.DESCRIPTION_STATIC}"></span></h4> 
+							<span th:utext="${sessionBean.fixedMsgBean.DESCRIPTION_STATIC_DETAIL}"></span> 
+						</div> 
+						<div class=""> 
+							<h4><span th:text="${sessionBean.fixedMsgBean.DESCRIPTION_DYNAMIC}"></span></h4> 
+							<span th:utext="${sessionBean.fixedMsgBean.DESCRIPTION_DYNAMIC_DETAIL}"></span> 
+						</div> 
+					</div> 
+				</div> 
+			</div> 
+			<div class="fixed_popup flexbox"> 
+				<div class="popup_outline popup_login flexbox"> 
+					<div class="popup_header flexbox"> 
+						<h4><span th:text="${sessionBean.fixedMsgBean.TITLE_LOGIN}"></span></h4> 
+						<div class="nav_btn close" onclick="closePopup('popup_login');"> 
+							<div class="bar1"></div> 
+							<div class="bar2"></div> 
+							<div class="bar3"></div> 
+						</div> 
+					</div> 
+					<div class="login_popup_content flexbox"> 
+						<div class="input_single"> 
+							<input type="text" th:field="*{input_value_login_id}" th:placeholder="${INSTRUCTION_ID} + '...'" class="input_elm_data popup_elm" th:classappend="${#fields.hasErrors('loginUserIdEmpty')} ? 'border_error'"> 
+							<div class="text_error text_error_login" th:if="${#fields.hasErrors('loginUserIdEmpty')}" th:text="${ERROR_MESSAGE}"></div>
+						</div> 
+						<div class="input_single"> 
+							<input type="password" th:field="*{input_value_login_pass}" th:placeholder="${INSTRUCTION_PASS} + '...'" class="input_elm_data popup_elm" th:classappend="${#fields.hasErrors('loginUserPassEmpty')} ? 'border_error'"> 
+							<div class="text_error text_error_login" th:if="${#fields.hasErrors('loginUserPassEmpty')}" th:text="${ERROR_MESSAGE}"></div> 
+						</div> 
+					</div> 
+					<div class="buttons flexbox" id=""> 
+						<button class="loginBtn normal" type="button"><span th:text="${sessionBean.fixedMsgBean.BTN_LOGIN}"></span></button> 
+					</div> 
+				</div> 
+			</div> 
+			<div class="container flexbox"> 
+				<div class="container_generator flexbox"> 
+					<section class="section_generator"> 
+						<div class="generator_nav flexbox customized_scrollbar"> 
+							<th:block th:each="element, elementStat : ${form.menuList}"> 
+								<th:block th:if="${element.value == form.qr_type}"> 
+									<div th:classappend="|qr_menu ${element.value} selected_nav|"> 
+										<span th:text="${element.text}"></span> 
+									</div> 
+								</th:block> 
+								<th:block th:unless="${element.value == form.qr_type}"> 
+									<div th:classappend="|qr_menu ${element.value}|"> 
+										<span th:text="${element.text}"></span> 
+									</div> 
+								</th:block> 
+							</th:block> 
+						</div> 
+						<div class="section_outline_input"> 
+							<div class="section_data"> 
+								<div class="input_section gridbox"> 
+									<div class="input_section_specific flexbox"> 
+										<div class="input_area input_menu_common">
+											<input type="text" th:field="*{input_value_qr_name}" th:placeholder="${INSTRUCTION_QR_NAME} + '...'" class="input_elm_data" th:classappend="${#fields.hasErrors('qrNameEmpty')} ? 'border_error'"> 
+											<div class="text_error" th:if="${#fields.hasErrors('qrNameEmpty')}" th:text="${ERROR_MESSAGE}"></div> 
+										</div>
+										<div class="input_area_parent"> 
+											<th:block th:if="${form.qr_type == 'web'}"> 
+												<div class="input_area input_menu_web"> 
+													<input type="text" th:field="*{input_value_web}" th:placeholder="${INSTRUCTION_WEB} + '...'" class="input_elm_data" th:classappend="${#fields.hasErrors('input_value_web')} ? 'border_error'"> 
+													<div class="text_error" th:if="${#fields.hasErrors('input_value_web')}" th:text="${ERROR_MESSAGE}"></div> 
+												</div> 
+											</th:block>
+
+											<th:block th:if="${form.qr_type == 'text'}"> 
+												<div class="input_area input_menu_text"> 
+													<textarea th:field="*{input_value_text}" maxlength="200" cols="100" rows="3" class="input_elm_data" th:placeholder="${INSTRUCTION_TEXT_LENGTH_LIMIT} + '...'" th:classappend="${#fields.hasErrors('input_value_text')} ? 'border_error'" th:text="*{input_value_text}"></textarea> 
+													<div class="text_error" th:if="${#fields.hasErrors('input_value_text')}" th:text="${ERROR_MESSAGE}"></div> 
+												</div> 
+											</th:block> 
+											<th:block th:if="${form.qr_type == 'wifi'}"> 
+												<div class="input_area input_menu_wifi"> 
+													<div class="input_menu_wifi_info flexbox"> 
+														<input type="text" th:field="*{input_value_wifi_id}" th:placeholder="${INSTRUCTION_WIFI_NAME} + '...'" class="input_elm_data" th:classappend="${#fields.hasErrors('input_value_wifi_id')} ? 'border_error'"> 
+														<div class="text_error" th:if="${#fields.hasErrors('input_value_wifi_id')}" th:text="${ERROR_MESSAGE}"></div> 
+															<input type="text" th:field="*{input_value_wifi_pass}" th:placeholder="${INSTRUCTION_WIFI_PASSWORD} + '...'" class="input_elm_data" th:classappend="${#fields.hasErrors('input_value_wifi_pass')} ? 'border_error'"> 
+														<div class="text_error" th:if="${#fields.hasErrors('input_value_wifi_pass')}" th:text="${ERROR_MESSAGE}"></div> 
+													</div> 
+												</div> 
+											</th:block> 
+											<th:block th:if="${form.qr_type == 'bulk'}"> 
+												<div class="input_area input_menu_bulk"> 
+													<textarea th:field="*{input_value_bulk}" maxlength="100" cols="5" rows="5" class="input_elm_data" th:placeholder="${INSTRUCTION_BULK} + '...'" th:classappend="${#fields.hasErrors('input_value_bulk')} ? 'border_error'" th:text="*{input_value_bulk}"></textarea> 
+													<div class="text_error" th:if="${#fields.hasErrors('input_value_bulk')}" th:text="${ERROR_MESSAGE}"></div> 
+												</div> 
+											</th:block> 
+											<th:block th:if="${form.qr_type == 'file'}"> 
+												<div class="input_area input_menu_file"> 
+													<button class="uploadFileSelect btn_narrow" id="uploadFileSelect" type="button"> 
+														<span th:text="${sessionBean.fixedMsgBean.BTN_SELECT_FILE}"></span> 
+													</button> 
+													<input type="file" name="input_value_file" id="input_value_file" onchange="filePreview(this);" style="display:none" required> 
+													<div class="previewUploadFileName" id="previewUploadFileName"></div> 
+													<img id="previewUploadFile" class="previewUploadFile" name="upload_file" th:src="${form.upload_file}" style="display:none"> 
+												</div> 
+											</th:block> 
+										</div> 
+									</div> 
+								</div> 
+							</div>
+						</div> 
+						<div class="buttons flexbox" id="generate_buttons"> 
+							<button class="createBtn normal" type="button"><span th:text="${sessionBean.fixedMsgBean.BTN_GENERATE}"></span></button> 
+							<button class="resetBtn normal" type="button"><span th:text="${sessionBean.fixedMsgBean.BTN_RESET}"></span></button> 
+						</div> 
+					</section> 
+					<section class="section_download noborder" id="section_download">
+						<section class="section_customize noborder" id="section_customize"> 
+							<div class="section_outline_customize"> 
+								<div class="section_customize_nav_btn flexbox"> 
+									<div class="style_btn_nav flexbox"> 
+										<h4><span th:text="${sessionBean.fixedMsgBean.BTN_CUSTOMIZE}"></span></h4> 
+										<button class="btn_light" id="style_expand_toggle_btn" type="button"> 
+											<span class="btn_light_expand_icon"></span> 
+										</button> 
+									</div> 
+								</div> 
+								<div class="section_data_append_style"> 
+									<div class="customize_nav flexbox customized_scrollbar"> 
+										<div class="customize_nav_menu customize_nav_basic selected_nav"> 
+											<span th:text="${sessionBean.fixedMsgBean.NAV_STYLE_BASIC}"></span> 
+										</div> 
+										<div class="customize_nav_menu customize_nav_finder"> 
+											<span th:text="${sessionBean.fixedMsgBean.NAV_STYLE_FINDER}"></span> 
+										</div> 
+										<div class="customize_nav_menu customize_nav_pixel"> 
+											<span th:text="${sessionBean.fixedMsgBean.NAV_STYLE_PIXEL}"></span> 
+										</div> 
+									</div> 
+									<div class="customize_nav_basic_input customize_nav_input" id="customize_nav_basic_input"> 
+										<div class="sub_section"> 
+											<div class="input_section flexbox"> 
+												<div class="input_single"> 
+													<h4><span th:text="${sessionBean.fixedMsgBean.LABEL_BG}"></span></h4> 
+													<input type="color" name="bg_color" id="bg_color" th:value="${form.selectedBgColor}" onchange="asyncSendCreate(true);"> 
+												</div> 
+												<div class="input_single"> 
+													<h4><span th:text="${sessionBean.fixedMsgBean.LABEL_FINDER}"></span></h4> 
+													<input type="color" name="finder_color" id="finder_color" th:value="${form.selectedFinderColor}" onchange="asyncSendCreate(true);"> 
+												</div> 
+												<div class="input_single"> 
+													<h4><span th:text="${sessionBean.fixedMsgBean.LABEL_PIXEL}"></span></h4> 
+													<input type="color" name="pixel_color" id="pixel_color" th:value="${form.selectedPixelColor}"onchange="asyncSendCreate(true);"> 
+												</div> 
+											</div> 
+										</div> 
+										<div class="sub_section"> 
+										<div class="input_single"> 
+											<h4><span th:text="${sessionBean.fixedMsgBean.LABEL_LOGO}"></span></h4> 
+											<div class="logo_needed_style flexbox"> 
+												<label for="switch_logo" class="switch_label"> 
+													<div class="switch_logo"> 
+														<input type="checkbox" id="switch_logo" name="logo_needed" th:value="${form.logo_needed}" th:checked="${form.logo_needed eq '1'}"/> 
+														<div class="circle"></div> 
+														<div class="base"></div> 
+													</div> 
+													<span class="logo_needed_description_text" th:text="${sessionBean.fixedMsgBean.LABEL_WITHOUT_LOGO}"></span> 
+												</label> 
+												<button class="fileSelect btn_narrow" id="fileSelect" type="button"><span th:text="${sessionBean.fixedMsgBean.BTN_SELECT_FILE}"></span></button> 
+												<div class="upload_img_section" style="display: block;"> 
+													<input type="file" name="file" id="fileElem" onchange="imgPreview(this);" style="display:none" accept="image/*"> 
+													<img id="preview" class="preview" name="" th:src="${form.plug_img}"> 
+												</div> 
+											</div> 
+										</div> 
+									</div> 
+									<div class="sub_section"> 
+										<div class="input_single"> 
+											<div class="logo_size_style"> 
+												<h4><span th:text="${sessionBean.fixedMsgBean.LABEL_LOGO_SIZE}"></span></h4> 
+												<label for="switch_logo_size" class="switch_label"> 
+													<div class="switch_logo_size"> 
+														<input type="checkbox" id="switch_logo_size" name="logo_size" th:value="${form.logo_size}" th:checked="${form.logo_size eq '1'}"/> 
+														<div class="circle"></div> 
+														<div class="base"></div> 
+													</div> 
+													<span class="logo_size_description_text" th:text="${sessionBean.fixedMsgBean.LABEL_SMALL}"></span> 
+												</label> 
+											</div> 
+										</div> 
+									</div> 
+								</div> 
+								<div class="customize_nav_finder_input customize_nav_input" id="customize_nav_finder_input"> 
+									<div class="customize_nav_img_select flexbox"> 
+										<th:block th:each="element, elementStat : ${form.finderList}"> 
+											<th:block th:if="${elementStat.index == 0}"> 
+												<div class="customize_nav_box selected_nav_around" th:onclick="|javascript:customizeStyleChanged(this, 'finder', '__${element.value}__');|"> 
+													<img th:src="${element.text}"/> 
+												</div> 
+											</th:block> 
+											<th:block th:unless="${elementStat.index == 0}"> 
+												<div class="customize_nav_box" th:onclick="|javascript:customizeStyleChanged(this, 'finder', '__${element.value}__');|"> 
+													<img th:src="${element.text}"/> 
+												</div> 
+											</th:block> 
+										</th:block> 
+									</div> 
+								</div> 
+								<div class="customize_nav_pixel_input customize_nav_input" id="customize_nav_pixel_input"> 
+									<div class="customize_nav_img_select flexbox"> 
+										<th:block th:each="element, elementStat : ${form.pixelList}"> 
+											<th:block th:if="${elementStat.index == 0}"> 
+												<div class="customize_nav_box selected_nav_around" th:onclick="|javascript:customizeStyleChanged(this, 'pixel', '__${element.value}__');|"> 
+													<img th:src="${element.text}"/> 
+												</div> 
+											</th:block> 
+											<th:block th:unless="${elementStat.index == 0}"> 
+												<div class="customize_nav_box" th:onclick="|javascript:customizeStyleChanged(this, 'pixel', '__${element.value}__');|"> 
+													<img th:src="${element.text}"/> 
+												</div> 
+											</th:block> 
+										</th:block> 
+									</div> 
+								</div> 
+								<div class="customize_nav_frame_input customize_nav_input" id="customize_nav_frame_input"> 
+									<div class="customize_nav_img_select flexbox"> 
+										<th:block th:each="element, elementStat : ${form.frameList}"> 
+											<th:block th:if="${elementStat.index == 0}"> 
+												<div class="customize_nav_box selected_nav_around" th:onclick="|javascript:customizeStyleChanged(this, 'frame', '__${element.value}__');|"> 
+													<img th:src="${element.text}"/> 
+												</div> 
+											</th:block> 
+											<th:block th:unless="${elementStat.index == 0}"> 
+												<div class="customize_nav_box" th:onclick="|javascript:customizeStyleChanged(this, 'frame', '__${element.value}__');|"> 
+													<img th:src="${element.text}"/> 
+												</div> 
+											</th:block> 
+										</th:block> 
+									</div> 
+								</div> 
+							</div> 
+						</div> 
+						</section> 
+						<div class="download_section" id="download_section"> 
+							<div class="download_img flexbox"> 
+								<th:block th:if="${form.zipBase64Data == ''}"> 
+									<th:block th:unless="${#lists.size(form.base64DataList) > 1}"> 
+										<th:block th:each="element, elementStat : ${form.base64DataList}"> 
+											<img th:src="${element}" id="qrCodeImg"/> 
+										</th:block> 
+									</th:block> 
+								</th:block> 
+								<th:block th:unless="${form.zipBase64Data == ''}"> 
+									<img th:src="${form.zipBase64Data}" id="qrCodeImg"/> 
+								</th:block> 
+								<div class="download_setting flexbox"> 
+									<div class="input_single"> 
+										<div class="img_types"> 
+											<label for="switch_img_type" class="switch_label"> 
+												<div class="switch_img_type"> 
+													<input type="checkbox" id="switch_img_type" name="img_type" th:value="${form.img_type}" th:checked="${form.img_type eq 'svg'}"/> 
+													<div class="circle"></div> 
+													<div class="base"></div> 
+												</div> 
+												<div class="description"> 
+													<span class="img_type_description_text" th:text="${form.img_type}"></span> 
+												</div> 
+											</label> 
+										</div> 
+									</div> 
+									<div class="input_single"> 
+										<div class="input_selectbox selectbox_pointer"> 
+											<select name="img_size" id="img_size" class="input_elm" onchange=""> 
+												<option th:each="t : ${form.imageSizeList}" th:value="${t.value}" th:text="${t.text} + 'px'" th:selected="${t.value == form.selectedImageSize}"> 
+												</option> 
+											</select> 
+										</div> 
+									</div> 
+								</div> 
+								<div class="download_operation"> 
+									<div class="buttons flexbox" id=""> 
+										<th:block th:if="${#lists.size(form.base64DataList) > 1}"> 
+											<button class="showBtn normal" type="button"><span th:text="${sessionBean.fixedMsgBean.BTN_SHOW}"></span></button>  
+										</th:block> 
+										<button class="downloadBtn normal" type="button"><span th:text="${sessionBean.fixedMsgBean.BTN_DOWNLOAD}"></span></button> 
+										<th:block th:if="${sessionBean.authorizedUser == true}"> 
+											<button class="trackBtn normal" type="button"><span th:text="${sessionBean.fixedMsgBean.BTN_TRACK}"></span></button> 
+										</th:block> 
+									</div> 
+								</div> 
+							</div> 
+						</div> 
+					</section> 
+				</div> 
+				<div class="container_learn"> 
+					<section class="section_learn" id="section_learn"> 
+						<div class="section_title"> 
+							<h3><span th:text="${sessionBean.fixedMsgBean.TITLE_LEARN}"></span></h3> 
+						</div> 
+						<div class="section_data flexbox"> 
+							<th:block th:if="${#lists.isEmpty(form.learnList)}"> 
+								<h4><span th:text="${sessionBean.fixedMsgBean.PREPARING}"></span></h4> 
+							</th:block> 
+							<th:block th:unless="${#lists.isEmpty(form.learnList)}"> 
+								<th:block th:each="element, elementStat : ${form.learnList}"> 
+									<div class="section_sub"> 
+										<div class="section_def flexbox"> 
+											<h4><span th:text="${element.question}"></span></h4> 
+											<button class="btn_light flexbox btn_light_learn btn_light_expand" type="button"> 
+												<span class="btn_light_expand_icon"></span> 
+											</button> 
+										</div> 
+										<div class="section_detail section_detail_expand section_detail_learn"> 
+											<span th:utext="${element.answer}"></span> 
+										</div> 
+									</div> 
+								</th:block> 
+							</th:block> 
+						</div> 
+					</section> 
+				</div> 
+				<div class="container_solution"> 
+					<section class="section_solution" id="section_solution"> 
+						<div class="section_title"> 
+							<h3><span th:text="${sessionBean.fixedMsgBean.TITLE_SOLUTION}"></span></h3> 
+						</div> 
+						<div class="section_data flexbox"> 
+							<th:block th:if="${#lists.isEmpty(form.solutionList)}"> 
+								<h4><span th:text="${sessionBean.fixedMsgBean.PREPARING}"></span></h4> 
+							</th:block> 
+							<th:block th:unless="${#lists.isEmpty(form.solutionList)}"> 
+								<th:block th:each="element, elementStat : ${form.solutionList}"> 
+									<div class="section_sub"> 
+										<div class="section_def flexbox"> 
+											<h4><span th:text="${element.category}"></span></h4> 
+											<button class="btn_light flexbox btn_light_solution btn_light_expand" type="button"> 
+												<span class="btn_light_expand_icon"></span> 
+											</button> 
+										</div> 
+										<div class="section_detail section_detail_expand section_detail_solution flexbox"> 
+											<div> 
+												<h5><span th:text="${sessionBean.fixedMsgBean.TITLE_SOLUTION_PROBLEM}"></span></h5> 
+												<span th:utext="${element.problem}"></span> 
+											</div> 
+											<div> 
+												<h5><span th:text="${sessionBean.fixedMsgBean.TITLE_SOLUTION_SOLUTION}"></span></h5> 
+												<span th:utext="${element.solution}"></span> 
+											</div> 
+										</div> 
+									</div> 
+								</th:block> 
+							</th:block> 
+						</div> 
+					</section> 
+				</div> 
+				<div class="container_product"> 
+					<section class="section_product" id="section_product"> 
+						<div class="section_title"> 
+							<h3><span th:text="${sessionBean.fixedMsgBean.TITLE_PRODUCT}"></span></h3> 
+						</div> 
+						<div class="section_data flexbox"> 
+							<th:block th:if="${#lists.isEmpty(form.productList)}"> 
+								<h4><span th:text="${sessionBean.fixedMsgBean.DEVELOPING}"></span></h4> 
+							</th:block> 
+							<th:block th:unless="${#lists.isEmpty(form.productList)}"> 
+								<th:block th:each="element, elementStat : ${form.productList}"> 
+									<div class="section_sub flexbox"> 
+										<div class="section_sub_detail flexbox"> 
+											<div class="section_def"> 
+												<h4><span th:text="${element.name}"></span></h4> 
+											</div> 
+											<div class="section_detail"> 
+												<span th:utext="${element.summary}"></span> 
+											</div> 
+										</div> 
+										<div> 
+											<button th:classappend="|btn_light flexbox btn_light_go|" type="button" th:onclick="|javascript:goToProduct('__${element.id}__');|"><span class="btn_light_go_icon"></span></button> 
+										</div> 
+									</div> 
+								</th:block> 
+							</th:block> 
+						</div> 
+					</section> 
+				</div> 
+			</div> 
+		</div> 
+		<div id="plug_footer" th:include="plug_footer"></div> 
+	</form> 
+</body> 
+</html>

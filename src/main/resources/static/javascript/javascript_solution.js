@@ -1,0 +1,4 @@
+function createSolution() {
+	//	mukouSeigyo();
+	return; 
+}

@@ -61,6 +61,7 @@
 	--width_common: 70%;
 	--width_smart: 90%;
 	--width_max: 700px;
+	--font_family_main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
 
 * {
@@ -75,6 +76,7 @@ html {
 }
 
 body {
+	font-family: var(--font_family_main);
 	font-size: var(--font_size_normal);
 	margin: 0 auto;
 	height: 100vh;
@@ -499,7 +501,7 @@ section.hero {
 	border: var(--border_size_common) solid var(--border_color);
 	width: 100%;
 	border-radius: var(--border_radius_main);
-	font-family: "Verdana", sans-serif;
+	font-family: var(--font_family_main);
 	padding: var(--padding_bigger) var(--padding_common);
 	box-shadow: var(--box_shadow);
 }
@@ -1336,8 +1338,8 @@ input:checked~.circle {
 
 #site_name {
 	font-size: 30px;
-	font-weight: bold;
-	font-family: Arial, sans-serif;
+	font-weight: 700;
+	font-family: var(--font_family_main);
 	text-align: center;
 }
 

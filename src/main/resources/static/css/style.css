@@ -96,6 +96,15 @@ a:hover {
 	text-decoration: underline;
 }
 
+.header a {
+	text-decoration: none;
+}
+
+.header a:hover,
+.header a:active {
+	text-decoration: underline;
+}
+
 .buttons {
 	text-align: center;
 	margin: 0 auto;
@@ -223,10 +232,6 @@ section.hero {
 	gap: var(--gap_0_7);
 }
 
-.logo a:hover {
-	text-decoration: none;
-}
-
 /*.logo a {*/
 .logo h1 {
 	font-size: var(--font_size_bigger);
@@ -339,12 +344,6 @@ section.hero {
 	padding: var(--padding_common) var(--padding_1_5);
 	width: fit-content;
 	margin: auto;
-}
-
-.nav_list a:hover,
-.lang_list a:hover,
-.user_list a:hover {
-	text-decoration: underline;
 }
 
 .selected {

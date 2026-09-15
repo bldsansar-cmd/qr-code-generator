@@ -46,14 +46,6 @@ public class Const {
 
 	public static String DYNAMIC_ONLY_QR_TYPES = "DYNAMIC_ONLY_QR_TYPES";
 
-	public static String PIXEL_TYPES = "PIXEL_TYPES";
-
-	public static String FINDER_TYPES = "FINDER_TYPES";
-
-	public static String FRAME_TYPES = "FRAME_TYPES";
-
-	public static String TEMPLATE_TYPES = "TEMPLATE_TYPES";
-
 	public static String INPUT_NAV = "INPUT_NAV";
 
 	public static String INPUT_MENU = "INPUT_MENU";
@@ -173,10 +165,6 @@ public class Const {
 	public static final String INSTRUCTION_TEXT_LENGTH_LIMIT = "INSTRUCTION_TEXT_LENGTH_LIMIT";
 
 	public static final String INSTRUCTION_FILE = "INSTRUCTION_FILE";
-
-	public static final String SOLUTIONS = "SOLUTIONS";
-
-	public static final String PRODUCTS = "PRODUCTS";
 
 	public static final String LINK_DETAIL = "LINK_DETAIL";
 

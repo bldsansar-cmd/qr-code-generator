@@ -66,25 +66,7 @@ function eventTouroku() {
 		scrollEvent()
 	});
 
-	if (colorPickerSimpleNavBg != undefined && colorPickerSimpleNavBg != null) {
-		colorPickerSimpleNavBg.addEventListener("click", () => {
-			adjustColorPicker(colorPickerDetailBg, "WHITE");
-		});
-	}
-
-	if (colorPickerSimpleNavPixel != undefined && colorPickerSimpleNavPixel != null) {
-		colorPickerSimpleNavPixel.addEventListener("click", () => {
-			adjustColorPicker(colorPickerDetailPixel, "BLACK");
-		});
-	}
-
-	if (colorPickerSimpleNavFinder != undefined && colorPickerSimpleNavFinder != null) {
-		colorPickerSimpleNavFinder.addEventListener("click", () => {
-			adjustColorPicker(colorPickerDetailFinder, "BLACK");
-		});
-	}
-
-	//メニューボタン押下処理 
+	//メニューボタン押下処理
 	if (qrMenuBtn != undefined && qrMenuBtn != null) {
 		for (i = 0; i < qrMenuBtn.length; i++) {
 			qrMenuBtn[i].addEventListener('click', (event) => {

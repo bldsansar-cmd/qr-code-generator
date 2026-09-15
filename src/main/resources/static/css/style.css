@@ -293,6 +293,22 @@ section.hero {
 	right: 5px;
 }
 
+/* header menu: show dropdown on hover */
+.logo:has(> a[href*="arrangeLangMenu"]:hover) ~ .nav_section .nav_lang,
+.nav_lang:hover {
+	display: block !important;
+}
+
+.logo:has(> img#user_profile_img_btn:hover) ~ .nav_section .nav_user,
+.nav_user:hover {
+	display: block !important;
+}
+
+.nav_btn:hover ~ .nav_menu,
+.nav_menu:hover {
+	display: block !important;
+}
+
 .empty_layer {
 	z-index: 10;
 	width: 100%;
